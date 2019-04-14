@@ -1,0 +1,15 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "mongo": "<mongodb connection string>"
+  },
+  "ApiKeys": {
+    "GeocodingApi": "<geocoding api key>",
+    "OnWaterApi": "<onWater api key>"
+  }
+}
