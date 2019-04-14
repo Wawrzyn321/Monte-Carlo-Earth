@@ -15,7 +15,6 @@ namespace MonteCarloEarth
 {
     public class Startup
     {
-
         private IConfiguration configuration { get; }
         private IHostingEnvironment environment { get; }
 
@@ -28,6 +27,11 @@ namespace MonteCarloEarth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOriginsHeadersAndMethods",
+                    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             string connectionString = configuration.GetConnectionString("mongo");
@@ -59,6 +63,17 @@ namespace MonteCarloEarth
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            //workaround for https://github.com/aspnet/AspNetCore/issues/4398
+            app.Use(async (ctx, next) =>
+            {
+                await next();
+                if (ctx.Response.StatusCode == 204)
+                {
+                    ctx.Response.ContentLength = 0;
+                }
+            });
+            app.UseCors("AllowAllOriginsHeadersAndMethods");
+            app.UseMvc();
             if (environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
