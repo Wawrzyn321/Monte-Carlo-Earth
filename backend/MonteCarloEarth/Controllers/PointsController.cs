@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 using MonteCarloEarth.Model;
 using MonteCarloEarth.ViewModel;
 using System.Threading.Tasks;
-using MonteCarloEarth.ExternalApi;
+using MonteCarloEarth.ExternalApi.OnWater;
 using MonteCarloEarth.Repository;
 
 namespace MonteCarloEarth.Controllers

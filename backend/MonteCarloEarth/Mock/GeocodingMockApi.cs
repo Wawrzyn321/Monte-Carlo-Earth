@@ -1,9 +1,9 @@
-﻿using MonteCarloEarth.Common;
-using MonteCarloEarth.ExternalApi.Geocoding;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using MonteCarloEarth.Common;
+using MonteCarloEarth.ExternalApi.Geocoding;
 
-namespace MonteCarloEarth.MockApi
+namespace MonteCarloEarth.Mock
 {
     //class used in case configuration has not been provided
     public class GeocodingMockApi : IGeocodingProvider

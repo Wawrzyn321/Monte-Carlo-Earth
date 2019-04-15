@@ -3,11 +3,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using MonteCarloEarth.Common;
-using MonteCarloEarth.ExternalApi.Geocoding;
 using MonteCarloEarth.ViewModel;
 using Newtonsoft.Json;
 
-namespace MonteCarloEarth.ExternalApi
+namespace MonteCarloEarth.ExternalApi.Geocoding
 {
     public class GeocodingApiProvider : IGeocodingProvider
     {

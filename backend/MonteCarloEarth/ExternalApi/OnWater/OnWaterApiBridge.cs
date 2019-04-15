@@ -5,7 +5,7 @@ using MonteCarloEarth.Common;
 using MonteCarloEarth.ViewModel;
 using Newtonsoft.Json;
 
-namespace MonteCarloEarth.ExternalApi
+namespace MonteCarloEarth.ExternalApi.OnWater
 {
     public class OnWaterApiProvider : IOnWaterProvider
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MonteCarloEarth.Common;
-using MonteCarloEarth.ExternalApi;
+using MonteCarloEarth.ExternalApi.OnWater;
 
-namespace MonteCarloEarth.MockApi
+namespace MonteCarloEarth.Mock
 {
     //class used in case configuration has not been provided
     public class OnWaterMockProvider : IOnWaterProvider
@@ -12,7 +12,7 @@ namespace MonteCarloEarth.MockApi
 
         public Task<bool> IsOnWaterAsync(IPoint point)
         {
-            const double propability = 0.708;
+            const double propability = 1 - 0.708;
             bool isOnWater = r.NextDouble() > propability;
             return Task.FromResult(isOnWater);
         }
