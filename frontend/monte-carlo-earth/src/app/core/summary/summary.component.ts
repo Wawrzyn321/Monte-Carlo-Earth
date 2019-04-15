@@ -12,6 +12,18 @@ export class SummaryComponent implements OnInit {
   allPointsCount = 0;
   waterPointsCount = 0;
 
+  allPointsCountStart = 0;
+  waterPointsCountStart = 0;
+  ratioStart = 0;
+
+  onCountoEnd(): void {
+    // after counto reached the "countTo", set new start variables
+    // all 3 counters are set here, as they finish at the same time
+    this.allPointsCountStart = this.allPointsCount;
+    this.waterPointsCountStart = this.waterPointsCount;
+    this.ratioStart = this.ratio;
+  }
+
   get ratio(): number {
     if (this.allPointsCount === 0) {
       return 0;

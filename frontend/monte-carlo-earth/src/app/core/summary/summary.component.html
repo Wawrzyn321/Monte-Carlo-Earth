@@ -1,5 +1,34 @@
 <section class="w-75  ">
-  <p>Currently, there are <strong>{{ allPointsCount }}</strong> points, <br/> of which <strong>{{ waterPointsCount }}</strong> are on water.</p>
-  <p>Acoording to this, <strong>{{ ratio | percent:'1.0-2'}}</strong> of the Earth surface <br/> is covered in water.</p>
+  <p>Currently, there are <strong counto
+    [step]="2" 
+    [countTo]="allPointsCount" 
+    [countFrom]="allPointsCountStart"
+    [duration]="0.2"
+    (countoChange)="counto_allPointsCount = $event">
+    {{counto_allPointsCount | number:'1.0-0'}}
+  </strong> 
+  points, <br/> of which 
+  <strong counto
+    [step]="2" 
+    [countTo]="waterPointsCount" 
+    [countFrom]="waterPointsCountStart"
+    [duration]="0.2"
+    (countoChange)="counto_waterPointsCount = $event"
+    (countoEnd)="onCountoEnd()">
+    {{counto_waterPointsCount | number:'1.0-0'}}
+  </strong> are on water.</p>
+
+
+  <p>Acoording to this, 
+    <strong counto
+      [step]="2" 
+      [countTo]="ratio" 
+      [countFrom]="ratioStart"
+      [duration]="0.2"
+      (countoChange)="counto_ratio = $event">
+      {{ counto_ratio | percent:'1.2-2'}}
+    </strong>
+    of the Earth surface <br/> is covered in water.</p>
   <p>According to <a href="https://en.wikipedia.org/wiki/Earth#Surface">Wikipedia</a> it's about <strong>70.8%</strong>.</p>
+  
 </section>

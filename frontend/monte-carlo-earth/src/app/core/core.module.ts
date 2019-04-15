@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
-import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// network
 import { API_CONFIG, ApiConfig } from './apiConfig';
 import { ErrorHandlingInterceptor } from './error-handling.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// components
 import { SummaryComponent } from './summary/summary.component';
 import { AddPointComponent } from './add-point/add-point.component';
 import { PointPresentationModule } from '../point-presentation/point-presentation.module';
+
+// third-party
+import { ToastrModule } from 'ngx-toastr';
+import { CountoModule } from 'angular2-counto';
 
 const baseUrl = 'https://localhost:44311/';
 const apiConfig: ApiConfig = {
@@ -24,6 +30,7 @@ const apiConfig: ApiConfig = {
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    CountoModule,
     PointPresentationModule
   ],
   providers: [

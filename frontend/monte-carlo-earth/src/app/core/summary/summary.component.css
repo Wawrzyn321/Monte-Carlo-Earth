@@ -3,4 +3,5 @@ section {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  min-height: 220px;
 }
