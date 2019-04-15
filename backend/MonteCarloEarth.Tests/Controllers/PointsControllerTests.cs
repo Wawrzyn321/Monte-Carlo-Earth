@@ -15,28 +15,6 @@ namespace MonteCarloEarth.Tests.Controllers
 {
     public class PointsControllerTests
     {
-        //todo
-        //[Fact]
-        //public async Task GET_ReturnsValidResult()
-        //{
-        //    var providerMock = new Mock<IOnWaterProvider>(MockBehavior.Strict);
-        //    var repositoryMock = new Mock<IPointRepository>(MockBehavior.Strict);
-        //    //repositoryMock.Setup(repository => repository.Count(It.Is<Func<Point, bool>>(func => true)))
-        //    //    .ReturnsAsync(5);
-        //    It.Is()
-        //    repositoryMock.Setup(repository => repository.Count(ex.AreEqual))
-        //        .ReturnsAsync(5).Verifiable();
-        //    var controller = new PointsController(providerMock.Object, repositoryMock.Object);
-
-        //    var actionResult = await controller.Get();
-
-        //    Assert.IsType<JsonResult>(actionResult.Result);
-        //    var jsonResult = (JsonResult) actionResult.Result;
-        //    var summary = (SummaryViewModel) jsonResult.Value;
-        //    Assert.Equal(5, summary.WaterCount);
-        //    //Assert.Equal(2, summary.AllCount);
-        //}
-
         [Fact]
         public async Task POST_ReturnsValidResult()
         {
@@ -53,6 +31,37 @@ namespace MonteCarloEarth.Tests.Controllers
             Assert.NotNull(jsonResult.Value);
             var point = (PointViewModel)jsonResult.Value;
             Assert.True(point.IsWater);
+        }
+
+        [Fact]
+        public async Task GET_ReturnsValidResponse()
+        {
+            var providerMock = new Mock<IOnWaterProvider>(MockBehavior.Loose);
+            var repositoryMock = new Mock<IPointRepository>(MockBehavior.Loose);
+            var controller = new PointsController(providerMock.Object, repositoryMock.Object);
+
+            var actionResult = await controller.Get();
+
+            Assert.IsType<JsonResult>(actionResult.Result);
+            var jsonResult = (JsonResult)actionResult.Result;
+            Assert.IsType<SummaryViewModel>(jsonResult.Value);
+        }
+
+        [Fact]
+        public async Task GET_ReturnsValidData()
+        {
+            var providerMock = new Mock<IOnWaterProvider>(MockBehavior.Strict);
+            var repositoryMock = new Mock<IPointRepository>(MockBehavior.Strict);
+            repositoryMock.Setup(repository => repository.Count(It.IsAny<Func<Point, bool>>()))
+                .ReturnsAsync(5);
+            var controller = new PointsController(providerMock.Object, repositoryMock.Object);
+
+            var actionResult = await controller.Get();
+
+            var jsonResult = (JsonResult)actionResult.Result;
+            var summary = (SummaryViewModel)jsonResult.Value;
+            Assert.Equal(5, summary.WaterCount);
+            Assert.Equal(5, summary.AllCount);
         }
 
         [Fact]
