@@ -1,0 +1,22 @@
+<section class="w-75">
+  <dl class="row">
+    <div class="col-6">
+      <dt>Latitude:</dt>
+      <dd>{{ point.latitude | coordinateFormatter:"N":"S" }} </dd>
+    </div>
+    <div class="col-6">
+      <dt>Longitude:</dt>
+      <dd>{{ point.longitude | coordinateFormatter:"E":"W" }} </dd>
+    </div>
+  </dl>
+  <dl class="row">
+    <div class="col-6">
+      <dt>Is on water?</dt>
+      <dd>{{ point.isOnWater | capitalize}} </dd>
+    </div>
+    <div class="col-6" *ngIf="!point.isOnWater">
+      <dt>Location:</dt>
+      <dd>{{ point.location ? point.location : 'loading...'}}</dd>
+    </div>
+  </dl>
+</section>

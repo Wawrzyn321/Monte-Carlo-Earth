@@ -1,0 +1,8 @@
+<section>
+  <button class="btn btn-primary my-3"
+   [disabled]="addButtonDisabled"
+   (click)="addNewPoint()">
+   {{ buttonText }}
+  </button>
+  <app-point-info *ngIf="point" [point]="point"></app-point-info>
+</section>
