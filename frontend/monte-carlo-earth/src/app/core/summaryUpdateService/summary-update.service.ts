@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { Point } from '../model';
+import { Point } from 'src/app/model';
 
 @Injectable({
   providedIn: 'root'

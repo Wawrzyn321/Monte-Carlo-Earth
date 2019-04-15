@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SummaryViewModel, PointViewModel, API_CONFIG, ApiConfig } from '../model';
+import { API_CONFIG, ApiConfig } from '../apiConfig';
+import { SummaryViewModel, PointViewModel } from 'src/app/model';
 
 @Injectable({
   providedIn: 'root'

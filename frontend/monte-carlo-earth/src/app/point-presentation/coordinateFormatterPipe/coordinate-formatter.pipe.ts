@@ -17,7 +17,7 @@ export class CoordinateFormatterPipe implements PipeTransform {
 
     return this.longLatToDMS(value) + ' ' + suffix;
   }
-  
+
   longLatToDMS(degrees: number) {
     const hours = Math.floor(degrees); // we don't need to worry about negative numbers
     degrees -= hours;

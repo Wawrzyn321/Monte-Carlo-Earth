@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PointService } from '../pointService/point.service';
-import { Point } from '../model';
+import { Point } from 'src/app/model';
 import { SummaryUpdateService } from '../summaryUpdateService/summary-update.service';
 
 @Component({

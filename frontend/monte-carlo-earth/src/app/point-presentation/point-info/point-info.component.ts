@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Point } from '../model';
-import { GeocodingService } from '../geocodingService/geocoding.service';
+import { Point } from 'src/app/model';
+import { GeocodingService } from 'src/app/core/geocodingService/geocoding.service';
 
 @Component({
   selector: 'app-point-info',
