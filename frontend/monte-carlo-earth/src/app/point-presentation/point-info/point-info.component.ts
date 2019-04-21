@@ -15,7 +15,7 @@ export class PointInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.point.isOnWater === false) {
+    if (this.point.isOnWater === false && this.point === null) {
       this.geocodingService.getLocation(this.point).subscribe(location => {
         this.point.location = location.toString();
       }, () => this.point.location = 'Unknown');
