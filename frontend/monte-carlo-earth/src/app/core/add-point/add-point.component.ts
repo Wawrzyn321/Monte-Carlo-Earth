@@ -34,11 +34,11 @@ export class AddPointComponent implements OnInit {
     this.isAddingNewPoint = true;
     this.point = null;
 
-    this.pointService.addPoint().subscribe(point => {
+    this.pointService.addPoint().subscribe(pointViewModel => {
       this.point = {
-        latitude: point.latitude,
-        longitude: point.longitude,
-        isOnWater: point.isWater,
+        latitude: pointViewModel.latitude,
+        longitude: pointViewModel.longitude,
+        isOnWater: pointViewModel.isWater,
         location: null
       };
 

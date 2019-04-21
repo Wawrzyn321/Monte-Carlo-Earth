@@ -10,6 +10,7 @@ import 'rxjs/add/observable/of';
 import { Observable} from 'rxjs';
 import { By } from '@angular/platform-browser';
 
+//#region Mock definitions
 @Pipe({name: 'coordinateFormatter'})
 class CoordinateFormatterPipeMock implements PipeTransform {
   transform(value: number, positiveSuffix: string, negativeSuffix: string): string {
@@ -28,6 +29,7 @@ class GeocodingServiceMock {
     return Observable.of('');
   }
 }
+//#endregion
 
 describe('PointInfoComponent', () => {
   let component: PointInfoComponent;
