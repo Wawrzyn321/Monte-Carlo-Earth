@@ -15,7 +15,7 @@ describe('NotificationService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should call Toastr\'s "error" function on "showErrorMessage" method',
+  it('calls Toastr\'s "error" function on "showErrorMessage" method',
     inject([NotificationService, ToastrService], (service: NotificationService, toastr: ToastrService) => {
       const spy: jasmine.Spy = spyOn(toastr, 'error');
 

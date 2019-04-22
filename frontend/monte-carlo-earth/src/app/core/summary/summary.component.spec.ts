@@ -44,7 +44,7 @@ describe('SummaryComponent', () => {
 
   describe('get ratio', () => {
 
-    it('should return ratio as 0 when no data has been provided yet', () => {
+    it('returns ratio as 0 when no data has been provided yet', () => {
       // zero-out data to simulate state before it's filled with server response
       component.allPointsCount = 0;
       component.waterPointsCount = 0;
@@ -52,7 +52,7 @@ describe('SummaryComponent', () => {
       expect(component.ratio).toBe(0);
     });
 
-    it('should calculate ratio when data has been provided', () => {
+    it('calculates ratio when data has been provided', () => {
       component.allPointsCount = 10;
       component.waterPointsCount = 6;
       fixture.detectChanges();

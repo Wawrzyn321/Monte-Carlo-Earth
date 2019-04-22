@@ -39,7 +39,7 @@ describe('PointService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return Observable<SummaryViewModel> from getPointsSummary', () => {
+  it('returns Observable<SummaryViewModel> from getPointsSummary', () => {
     const dummySummary: SummaryViewModel = {
       allCount: 8,
       waterCount: 5
@@ -57,7 +57,7 @@ describe('PointService', () => {
     req.flush(dummySummary);
   });
 
-  it('should return Observable<PointViewModel> from getPointsSummary', () => {
+  it('returns Observable<PointViewModel> from getPointsSummary', () => {
     const dummyPointVM: PointViewModel = {
       isWater: true,
       latitude: 10,
