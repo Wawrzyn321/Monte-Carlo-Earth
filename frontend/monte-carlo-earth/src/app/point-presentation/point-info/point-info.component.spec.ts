@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { PointInfoComponent } from './point-info.component';
 import { PipeTransform, Pipe } from '@angular/core';
@@ -112,6 +112,29 @@ describe('PointInfoComponent', () => {
       expect(element).toBeDefined();
       expect(element.innerText).toBe('Tokio');
     });
+
+    fit('does not call geocoding service when point is on water', inject([GeocodingService], (service: GeocodingService) => {
+      fixture = TestBed.createComponent(PointInfoComponent);
+
+      const spy = spyOn(service, 'getLocation').and.returnValue(Observable.of<String>(''));
+
+      component = fixture.componentInstance;
+      component.point = {isOnWater: true, latitude: 0, location: null, longitude: 0};
+      fixture.detectChanges();
+      expect(spy).not.toHaveBeenCalled();
+    }));
+
+    fit('calls geocoding service when point is not on water', inject([GeocodingService], (service: GeocodingService) => {
+      fixture = TestBed.createComponent(PointInfoComponent);
+
+      const spy = spyOn(service, 'getLocation').and.returnValue(Observable.of<String>(''));
+
+      component = fixture.componentInstance;
+      component.point = {isOnWater: false, latitude: 0, location: null, longitude: 0};
+      fixture.detectChanges();
+
+      expect(spy).toHaveBeenCalled();
+    }));
   });
 
   describe('"latitude and longitude" section', () => {
