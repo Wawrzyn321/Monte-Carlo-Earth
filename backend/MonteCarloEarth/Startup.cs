@@ -43,7 +43,7 @@ namespace MonteCarloEarth
                 else if (connectionString == null) //production, but configuration is missing
                 {
                     Trace.WriteLine("Configuration data not supplied! Configuration pattern is " +
-                    "stored in __appsettings.json file."); 
+                    "stored in __appsettings.json file. Running with mock services.");
                 }
 
                 services.AddSingleton<IPointRepository, MockRepository>();
@@ -80,7 +80,6 @@ namespace MonteCarloEarth
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
