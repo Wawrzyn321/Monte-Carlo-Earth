@@ -51,79 +51,85 @@ describe('PointInfoComponent', () => {
     .compileComponents();
   }));
 
-  it('displays false when point is not on water', () => {
-    fixture = TestBed.createComponent(PointInfoComponent);
-    component = fixture.componentInstance;
-    component.point = { isOnWater: false, latitude: 0, location: null, longitude: 0 };
-    fixture.detectChanges();
+  describe('"is on water" section', () => {
+    it('displays false when point is not on water', () => {
+      fixture = TestBed.createComponent(PointInfoComponent);
+      component = fixture.componentInstance;
+      component.point = { isOnWater: false, latitude: 0, location: null, longitude: 0 };
+      fixture.detectChanges();
 
-    const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(1) > dd';
-    const element = fixture.debugElement.query(By.css(selector));
-    expect(element).toBeDefined();
-    expect(element.nativeElement.innerText).toBe('false');
+      const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(1) > dd';
+      const element = fixture.debugElement.query(By.css(selector));
+      expect(element).toBeDefined();
+      expect(element.nativeElement.innerText).toBe('false');
+    });
+
+    it('displays true when point is on water', () => {
+      fixture = TestBed.createComponent(PointInfoComponent);
+      component = fixture.componentInstance;
+      component.point = { isOnWater: true, latitude: 0, location: null, longitude: 0 };
+      fixture.detectChanges();
+
+      const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(1) > dd';
+      const element = fixture.debugElement.query(By.css(selector));
+      expect(element).toBeDefined();
+      expect(element.nativeElement.innerText).toBe('true');
+    });
   });
 
-  it('displays true when point is on water', () => {
-    fixture = TestBed.createComponent(PointInfoComponent);
-    component = fixture.componentInstance;
-    component.point = { isOnWater: true, latitude: 0, location: null, longitude: 0 };
-    fixture.detectChanges();
+  describe('"location" section', () => {
+    it('does not display location when on water', () => {
+      fixture = TestBed.createComponent(PointInfoComponent);
+      component = fixture.componentInstance;
+      component.point = { isOnWater: true, latitude: 0, location: 'Tokio', longitude: 0 };
+      fixture.detectChanges();
 
-    const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(1) > dd';
-    const element = fixture.debugElement.query(By.css(selector));
-    expect(element).toBeDefined();
-    expect(element.nativeElement.innerText).toBe('true');
+      const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(2)';
+      const element = fixture.debugElement.query(By.css(selector));
+      expect(element).toBeFalsy();
+    });
+
+    it('displays "loading..." when not on water and location is null', () => {
+      fixture = TestBed.createComponent(PointInfoComponent);
+      component = fixture.componentInstance;
+      component.point = {isOnWater: false, latitude: 0, location: null, longitude: 0};
+      fixture.detectChanges();
+
+      const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(2) > dd';
+      const element = fixture.debugElement.query(By.css(selector)).nativeElement;
+      expect(element).toBeDefined();
+      expect(element.innerText).toBe('loading...');
+    });
+
+    it('displays location when not on water and location is set', () => {
+      fixture = TestBed.createComponent(PointInfoComponent);
+      component = fixture.componentInstance;
+      component.point = {isOnWater: false, latitude: 0, location: 'Tokio', longitude: 0};
+      fixture.detectChanges();
+
+      const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(2) > dd';
+      const element = fixture.debugElement.query(By.css(selector)).nativeElement;
+      expect(element).toBeDefined();
+      expect(element.innerText).toBe('Tokio');
+    });
   });
 
-  it('does not display location when on water', () => {
-    fixture = TestBed.createComponent(PointInfoComponent);
-    component = fixture.componentInstance;
-    component.point = { isOnWater: true, latitude: 0, location: 'Tokio', longitude: 0 };
-    fixture.detectChanges();
+  describe('"latitude and longitude" section', () => {
+    it('displays latitude and longitude', () => {
+      fixture = TestBed.createComponent(PointInfoComponent);
+      component = fixture.componentInstance;
+      component.point = {isOnWater: true, latitude: 10, location: null, longitude: 20};
+      fixture.detectChanges();
 
-    const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(2)';
-    const element = fixture.debugElement.query(By.css(selector));
-    expect(element).toBeFalsy();
-  });
+      const latitudeSelector = 'dl.row:nth-child(1) > div.col-6:nth-child(1) > dd';
+      const latitudeElement = fixture.debugElement.query(By.css(latitudeSelector)).nativeElement;
+      expect(latitudeElement).toBeDefined();
+      expect(latitudeElement.innerText).toBe('10');
 
-  it('displays "loading..." when not on water and location is null', () => {
-    fixture = TestBed.createComponent(PointInfoComponent);
-    component = fixture.componentInstance;
-    component.point = {isOnWater: false, latitude: 0, location: null, longitude: 0};
-    fixture.detectChanges();
-
-    const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(2) > dd';
-    const element = fixture.debugElement.query(By.css(selector)).nativeElement;
-    expect(element).toBeDefined();
-    expect(element.innerText).toBe('loading...');
-  });
-
-  it('displays location when not on water and location is set', () => {
-    fixture = TestBed.createComponent(PointInfoComponent);
-    component = fixture.componentInstance;
-    component.point = {isOnWater: false, latitude: 0, location: 'Tokio', longitude: 0};
-    fixture.detectChanges();
-
-    const selector = 'dl.row:nth-child(2) > div.col-6:nth-child(2) > dd';
-    const element = fixture.debugElement.query(By.css(selector)).nativeElement;
-    expect(element).toBeDefined();
-    expect(element.innerText).toBe('Tokio');
-  });
-
-  it('displays latitude and longitude', () => {
-    fixture = TestBed.createComponent(PointInfoComponent);
-    component = fixture.componentInstance;
-    component.point = {isOnWater: true, latitude: 10, location: null, longitude: 20};
-    fixture.detectChanges();
-
-    const latitudeSelector = 'dl.row:nth-child(1) > div.col-6:nth-child(1) > dd';
-    const latitudeElement = fixture.debugElement.query(By.css(latitudeSelector)).nativeElement;
-    expect(latitudeElement).toBeDefined();
-    expect(latitudeElement.innerText).toBe('10');
-
-    const longitudeSelector = 'dl.row:nth-child(1) > div.col-6:nth-child(2) > dd';
-    const longitudeElement = fixture.debugElement.query(By.css(longitudeSelector)).nativeElement;
-    expect(longitudeElement).toBeDefined();
-    expect(longitudeElement.innerText).toBe('20');
+      const longitudeSelector = 'dl.row:nth-child(1) > div.col-6:nth-child(2) > dd';
+      const longitudeElement = fixture.debugElement.query(By.css(longitudeSelector)).nativeElement;
+      expect(longitudeElement).toBeDefined();
+      expect(longitudeElement.innerText).toBe('20');
+    });
   });
 });
