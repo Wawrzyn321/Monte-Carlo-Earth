@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace MonteCarloEarth
 {
@@ -12,6 +13,10 @@ namespace MonteCarloEarth
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =>
+                {
+                    logging.AddAzureWebAppDiagnostics();
+                })
                 .UseStartup<Startup>();
     }
 }

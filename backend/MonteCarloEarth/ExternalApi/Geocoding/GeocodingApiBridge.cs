@@ -33,7 +33,14 @@ namespace MonteCarloEarth.ExternalApi.Geocoding
                     if (model.Status.Message == "OK")
                     {
                         //theoretically, client shouldn't ask or location if it already knows that isWater is true
-                        return model.Results.Any() ? model.Results[0].Components.Country : "Somewhere on the water";
+                        if (!model.Results.Any() || model.Results[0].Components.Country == null)
+                        {
+                            return "Somewhere on the water";
+                        }
+                        else
+                        {
+                            return model.Results[0].Components.Country;
+                        }
                     }
                     else
                     {

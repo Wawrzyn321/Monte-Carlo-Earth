@@ -2,6 +2,8 @@
 using MonteCarloEarth.Model;
 using MonteCarloEarth.ViewModel;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using MonteCarloEarth.ExternalApi;
 using MonteCarloEarth.ExternalApi.OnWater;
 using MonteCarloEarth.Repository;
 
@@ -13,11 +15,13 @@ namespace MonteCarloEarth.Controllers
     {
         private readonly IOnWaterProvider onWaterApi;
         private readonly IPointRepository repository;
+        private readonly ILogger<PointsController> logger;
 
-        public PointsController(IOnWaterProvider onWaterApi, IPointRepository repository)
+        public PointsController(IOnWaterProvider onWaterApi, IPointRepository repository, ILogger<PointsController> logger)
         {
             this.onWaterApi = onWaterApi;
             this.repository = repository;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -36,7 +40,17 @@ namespace MonteCarloEarth.Controllers
         public async Task<ActionResult> Post()
         {
             var p = Point.CreatePoint();
-            p.IsWater = await onWaterApi.IsOnWaterAsync(p);
+
+            try
+            {
+                p.IsWater = await onWaterApi.IsOnWaterAsync(p);
+            }
+            catch (ApiException e)
+            {
+                logger.LogWarning(e.Message);
+                //it seems that we reached our 15/minute api calls limit
+                return StatusCode(422, e.Message); //422 - Unprocessable failure
+            }
 
             await repository.AddAsync(p);
 

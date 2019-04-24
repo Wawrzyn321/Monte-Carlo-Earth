@@ -48,7 +48,7 @@ namespace MonteCarloEarth.ExternalApi.OnWater
             string apiKey = configuration.GetSection("ApiKeys")["OnWaterApi"];
             float lat = point.Latitude;
             float lon = point.Longitude;
-            string baseUrl = $"https://api.onwater.io/api/v1/results/{lon},{lat}?access_token={apiKey}";
+            string baseUrl = $"https://api.onwater.io/api/v1/results/{lat},{lon}?access_token={apiKey}";
             return baseUrl;
         }
 

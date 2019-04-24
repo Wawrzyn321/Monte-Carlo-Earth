@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using MonteCarloEarth.ExternalApi.Geocoding;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 using MonteCarloEarth.ExternalApi.OnWater;
 using MonteCarloEarth.Mock;
 using MonteCarloEarth.Repository;
@@ -14,13 +15,15 @@ namespace MonteCarloEarth
 {
     public class Startup
     {
-        private IConfiguration configuration { get; }
-        private IHostingEnvironment environment { get; }
+        private readonly IConfiguration configuration;
+        private readonly IHostingEnvironment environment;
+        private readonly ILogger<Startup> logger;
 
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment, ILogger<Startup> logger)
         {
             this.configuration = configuration;
             this.environment = environment;
+            this.logger = logger;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -33,7 +36,7 @@ namespace MonteCarloEarth
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            string connectionString = configuration.GetConnectionString("mongo");
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
             if (connectionString == null || !environment.IsProduction())
             {
                 if (!environment.IsProduction()) //development

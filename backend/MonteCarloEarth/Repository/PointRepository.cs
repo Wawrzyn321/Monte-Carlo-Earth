@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MongoDB.Driver;
+using MonteCarloEarth.Model;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using MongoDB.Driver;
-using MonteCarloEarth.Model;
+using Microsoft.Extensions.Logging;
 
 namespace MonteCarloEarth.Repository
 {
@@ -23,7 +23,12 @@ namespace MonteCarloEarth.Repository
 
         public async Task<long> Count(Func<Point, bool> predicate)
         {
-            return await points.CountDocumentsAsync(point => predicate(point));
+            //points.CountDocumentsAsync() won't work
+            //http://blog.i3arnon.com/2015/12/16/async-linq-to-objects-over-mongodb/
+            var queryable = points.AsQueryable();
+            var asyncEnumerable = queryable.ToAsyncEnumerable();
+            int count = await asyncEnumerable.Count(predicate);
+            return count;
         }
     }
 }
