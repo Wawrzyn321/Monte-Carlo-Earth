@@ -113,7 +113,7 @@ describe('PointInfoComponent', () => {
       expect(element.innerText).toBe('Tokio');
     });
 
-    fit('does not call geocoding service when point is on water', inject([GeocodingService], (service: GeocodingService) => {
+    it('does not call geocoding service when point is on water', inject([GeocodingService], (service: GeocodingService) => {
       fixture = TestBed.createComponent(PointInfoComponent);
 
       const spy = spyOn(service, 'getLocation').and.returnValue(Observable.of<String>(''));
@@ -124,7 +124,7 @@ describe('PointInfoComponent', () => {
       expect(spy).not.toHaveBeenCalled();
     }));
 
-    fit('calls geocoding service when point is not on water', inject([GeocodingService], (service: GeocodingService) => {
+    it('calls geocoding service when point is not on water', inject([GeocodingService], (service: GeocodingService) => {
       fixture = TestBed.createComponent(PointInfoComponent);
 
       const spy = spyOn(service, 'getLocation').and.returnValue(Observable.of<String>(''));

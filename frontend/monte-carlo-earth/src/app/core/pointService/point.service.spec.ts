@@ -1,4 +1,4 @@
-import { TestBed, inject, getTestBed } from '@angular/core/testing';
+import { TestBed, getTestBed } from '@angular/core/testing';
 
 import { PointService } from './point.service';
 import { HttpClientModule } from '@angular/common/http';
