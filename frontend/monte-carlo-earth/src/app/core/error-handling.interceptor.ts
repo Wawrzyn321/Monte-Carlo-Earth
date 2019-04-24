@@ -18,7 +18,11 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(catchError(error => {
             if (error instanceof HttpErrorResponse) {
                 console.warn(error);
-                this.notificationService.showErrorMessage('Connection error!');
+                if (error.status === 422) { // unprocessable failure
+                    this.notificationService.showWarning('Cannot check point position, try again later.');
+                } else {
+                    this.notificationService.showError('Connection error!');
+                }
             }
             return throwError(error);
         }));

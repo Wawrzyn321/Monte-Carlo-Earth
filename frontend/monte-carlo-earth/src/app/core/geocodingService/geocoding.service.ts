@@ -11,9 +11,9 @@ export class GeocodingService {
   constructor(private httpClient: HttpClient, @Inject(API_CONFIG) private config: ApiConfig) { }
 
   getLocation(point: Point) {
-    const params = new HttpParams();
-    params.set('latitude', point.latitude.toString());
-    params.set('longitude', point.longitude.toString());
+    const params = new HttpParams()
+      .append('latitude', point.latitude.toString())
+      .append('longitude', point.longitude.toString());
 
     return this.httpClient.get(this.config.geocodingUrl, { params });
   }

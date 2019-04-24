@@ -8,7 +8,11 @@ export class NotificationService {
 
   constructor(private toastrService: ToastrService) { }
 
-  showErrorMessage(message: string) {
+  showError(message: string) {
     this.toastrService.error(message);
+  }
+
+  showWarning(message: string) {
+    this.toastrService.warning(message);
   }
 }
