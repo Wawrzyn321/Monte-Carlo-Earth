@@ -28,7 +28,7 @@ namespace MonteCarloEarth.Controllers
             try
             {
                 string location = await geocodingApi.ReverseGeocoding(point);
-                return new JsonResult(location);
+                return new JsonResult(new LocationViewModel { Location = location } );
             }
             catch (ApiException e)
             {

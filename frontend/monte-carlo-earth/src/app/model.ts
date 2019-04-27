@@ -9,6 +9,10 @@ export interface PointViewModel {
     isWater: boolean;
 }
 
+export interface LocationViewModel {
+    location: string;
+}
+
 export interface Point {
     latitude: number;
     longitude: number;

@@ -5,6 +5,7 @@ using MonteCarloEarth.Common;
 using MonteCarloEarth.Controllers;
 using MonteCarloEarth.ExternalApi;
 using MonteCarloEarth.ExternalApi.Geocoding;
+using MonteCarloEarth.ViewModel;
 using Moq;
 using Xunit;
 
@@ -13,7 +14,7 @@ namespace MonteCarloEarth.Tests.Controllers
     public class GeocodingControllerTests
     {
         [Fact]
-        public async Task GET_ReturnsValidResponse_OnValidBridgeResponse()
+        public async Task GET_ReturnsJsonResult_OnValidBridgeResponse()
         {
             var providerMock = new Mock<IGeocodingProvider>(MockBehavior.Strict);
             providerMock.Setup(provider => provider.ReverseGeocoding(It.IsAny<IPoint>()))
@@ -24,8 +25,23 @@ namespace MonteCarloEarth.Tests.Controllers
             var result = await controller.Get(0, 0);
 
             Assert.IsType<JsonResult>(result);
-            var jsonResult = (JsonResult) result;
-            Assert.Equal("location", jsonResult.Value);
+        }
+
+        [Fact]
+        public async Task GET_ReturnsValidLocationViewModel_OnValidBridgeResponse()
+        {
+            var providerMock = new Mock<IGeocodingProvider>(MockBehavior.Strict);
+            providerMock.Setup(provider => provider.ReverseGeocoding(It.IsAny<IPoint>()))
+                .ReturnsAsync("location");
+            var loggerStub = new Mock<ILogger<GeocodingController>>(MockBehavior.Loose);
+            var controller = new GeocodingController(providerMock.Object, loggerStub.Object);
+
+            var result = await controller.Get(0, 0);
+
+            JsonResult jsonResult = (JsonResult)result;
+            Assert.IsType<LocationViewModel>(jsonResult.Value);
+            LocationViewModel viewModel = (LocationViewModel)jsonResult.Value;
+            Assert.Equal("location", viewModel.Location);
         }
 
         [Fact]
