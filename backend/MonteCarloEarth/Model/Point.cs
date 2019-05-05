@@ -37,8 +37,8 @@ namespace MonteCarloEarth.Model
             {
                 Latitude = latitude,
                 Longitude = longitude,
-                Id = Guid.NewGuid().ToString()
-            };
+                Id = ObjectId.GenerateNewId().ToString()
+        };
         }
 
         //maps double in range (0, 1) to float in range (min, max)
