@@ -15,7 +15,7 @@ import { PointPresentationModule } from '../point-presentation/point-presentatio
 import { ToastrModule } from 'ngx-toastr';
 import { CountoModule } from 'angular2-counto';
 
-const baseUrl = 'https://localhost:44311/';
+const baseUrl = 'https://monte-carlo-earth.azurewebsites.net/';
 const apiConfig: ApiConfig = {
   pointsUrl: baseUrl + 'api/points',
   geocodingUrl:  baseUrl + 'api/geocoding'

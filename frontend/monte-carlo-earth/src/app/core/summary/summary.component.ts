@@ -16,6 +16,12 @@ export class SummaryComponent implements OnInit {
   waterPointsCountStart = 0;
   ratioStart = 0;
 
+  //#region Counto
+  counto_allPointsCount: number;
+  counto_waterPointsCount: number;
+  counto_ratio: number;
+  //#endregion
+
   onCountoEnd(): void {
     // after counto reached the "countTo", set new start variables
     // all 3 counters are set here, as they finish at the same time
