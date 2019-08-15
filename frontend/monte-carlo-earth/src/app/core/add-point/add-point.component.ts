@@ -35,6 +35,13 @@ export class AddPointComponent implements OnInit {
     this.point = null;
 
     this.pointService.addPoint().subscribe(pointViewModel => {
+
+      if (typeof pointViewModel.latitude === 'undefined') {
+        alert('API request limit exceeded, try again in a while');
+        this.isAddingNewPoint = false;
+        return;
+      }
+
       this.point = {
         latitude: pointViewModel.latitude,
         longitude: pointViewModel.longitude,
@@ -44,7 +51,8 @@ export class AddPointComponent implements OnInit {
 
       this.summaryUpdateService.emitIncrementEvent(this.point);
       this.isAddingNewPoint = false;
-    }, () => {
+    }, err => {
+      console.log(err);
       this.isAddingNewPoint = false;
     });
   }

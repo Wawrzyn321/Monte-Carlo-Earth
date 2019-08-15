@@ -14,6 +14,11 @@ async function getLocation(latitude, longitude) {
     
     const response = await fetch(url);
     const json = await response.json();
+    
+    if (!json.results[0]) {
+        return 'Somewhere';
+    }
+
     let location = json.results[0].components.country;
     if (location == null) {
         location = 'Somewhere on the water';

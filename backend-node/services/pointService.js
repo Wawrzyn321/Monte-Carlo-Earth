@@ -16,7 +16,7 @@ function map(value, min, max)
 }
 
 async function getSummary() {
-    const waterCount = await repository.getCollection().countDocuments({ IsWater: true });
+    const waterCount = await repository.getCollection().countDocuments({ isWater: true });
     const allCount = await repository.getCollection().countDocuments({});
     return {
         waterCount,
@@ -36,13 +36,26 @@ async function addPoint() {
     const url = buildOnWaterRequestUrl(point);
     const response = await fetch(url);
     const json = await response.json();
+    if (json.error != null) {
+        throw Error(json.error);
+    }
     
     point.isWater = json.water;
+    if (point.isWater === null) {
+        point.isWater = await createIsWater();
+    }
 
     await repository.getCollection().insertOne(point);
 
     return point;
 }
+
+async function createIsWater() {
+    const { waterCount, allCount } = await getSummary();
+    const ratio = waterCount / allCount;
+    return ratio < 70.8;
+}
+
 
 module.exports = {
     getSummary,
