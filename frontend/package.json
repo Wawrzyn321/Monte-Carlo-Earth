@@ -3,23 +3,25 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --port 402",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.1.10",
-    "@angular/common": "^6.0.3",
-    "@angular/compiler": "^6.0.3",
-    "@angular/core": "^6.0.3",
-    "@angular/forms": "^6.0.3",
     "@angular/http": "^6.0.3",
-    "@angular/platform-browser": "^6.0.3",
-    "@angular/platform-browser-dynamic": "^6.0.3",
-    "@angular/router": "^6.0.3",
     "@types/jasmine": "2.8.9",
+    "@angular/animations": "~8.2.0",
+    "@angular/common": "~8.2.0",
+    "@angular/compiler": "~8.2.0",
+    "@angular/core": "~8.2.0",
+    "@angular/forms": "~8.2.0",
+    "@angular/platform-browser": "~8.2.0",
+    "@angular/platform-browser-dynamic": "~8.2.0",
+    "@angular/router": "~8.2.0",
+    "tslib": "^1.10.0",
+    "angular": "^1.7.8",
     "angular2-counto": "^1.2.5",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
@@ -47,6 +49,6 @@
     "protractor": "^6.0.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "~2.7.2"
+    "typescript": "^3.5.3"
   }
 }
