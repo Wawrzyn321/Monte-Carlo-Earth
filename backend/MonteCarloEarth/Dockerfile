@@ -10,4 +10,4 @@ COPY . ./
 
 RUN dotnet publish -c Release -o out
 
-CMD ["dotnet", "/app/out/MonteCarloEarth.dll"]
+CMD ["dotnet", "/app/out/MonteCarloEarth.dll", "--urls", "http://localhost:5050"]

@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  backend:
+    container_name: backend-node
+    restart: always
+    build: ./backend/MonteCarloEarth
+    ports:
+      - "3000:80"
+  fontend:
+    container_name: ng-frontend
+    restart: always
+    build: ./frontend
+    ports:
+      - "4500:4200"
+  
+  backend:
+    container_name: asp-core-backend
+    restart: always
+    build: ./backend/MonteCarloEarth
+    ports:
+      - "5050:5050"

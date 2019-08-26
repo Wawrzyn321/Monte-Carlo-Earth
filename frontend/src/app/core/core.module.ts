@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,7 +16,8 @@ import { PointPresentationModule } from '../point-presentation/point-presentatio
 import { ToastrModule } from 'ngx-toastr';
 import { CountoModule } from 'angular2-counto';
 
-const baseUrl = 'https://monte-carlo-earth.azurewebsites.net/';
+const baseUrl = environment.apiUrl;
+
 const apiConfig: ApiConfig = {
   pointsUrl: baseUrl + 'api/points',
   geocodingUrl:  baseUrl + 'api/geocoding'
